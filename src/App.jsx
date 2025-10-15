@@ -6,7 +6,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // # IMPORT LAYOUT
 
 // # IMPORT PAGES
+import HomeDashboard from "./pages/HomeDashboard";
 
 export default function App() {
-  return "ciao";
+  return <HomeDashboard />;
 }
