@@ -3,17 +3,36 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 export default function useRequest() {
-  const [postMessage, setposts] = useState([]);
+  const [news, setNews] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
-  // FUNZIONE INDEX
+  // FUNZIONE INDEX NEWS
   async function getPosts() {
     try {
       const res = await axios.get("https://dummyjson.com/posts");
-      console.log("DATI: ", res.data);
+      // console.log("DATI: ", res.data.posts);
+      setNews(res.data.posts);
     } catch (e) {
       console.error("Errore", e);
     }
   }
+  useEffect(() => {
+    getPosts();
+  }, []);
 
-  return { getPosts };
+  // FUNZIONE INDEX RICETTE
+  async function getRecipes() {
+    try {
+      const res = await axios.get("https://dummyjson.com/recipes");
+      // console.log("RICETTE: ", res.data);
+      setRecipes(res.data.recipes);
+    } catch (e) {
+      console.error("Errore", e);
+    }
+  }
+  useEffect(() => {
+    getRecipes();
+  }, []);
+
+  return { news, recipes };
 }

@@ -1,13 +1,8 @@
-//  # IMPORT HOOKS
-import { useEffect } from "react";
+// # IMPORT HOOKS
 import useRequest from "../hooks/useRequest";
 
 export default function HomeDashboard() {
-  const { getPosts } = useRequest();
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
-  return "Dash";
+  const { news } = useRequest();
+  console.log(news);
+  return "HOME DASH";
 }
