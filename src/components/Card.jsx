@@ -9,7 +9,7 @@ export default function Card({ title, likes, tags, views, idUser }) {
     if (idUser) RequestUserNews(idUser); // ⬅️ niente fetch se manca l'id
   }, [idUser]);
 
-  console.log("USER :", userNews);
+  // console.log("USER :", userNews);
 
   return (
     <div className="col-12 col-md-6 col-lg-3 my-3 d-flex justify-content-center">

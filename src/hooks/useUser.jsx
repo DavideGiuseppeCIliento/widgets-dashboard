@@ -10,7 +10,7 @@ export default function useUser() {
     if (!idUser) return;
     try {
       const res = await axios.get(`https://dummyjson.com/users/${idUser}`);
-      console.log("USER in HOOK: ", res.data);
+      //   console.log("USER in HOOK: ", res.data);
       setUserNews(res.data);
     } catch (e) {
       console.error("Errore", e);
