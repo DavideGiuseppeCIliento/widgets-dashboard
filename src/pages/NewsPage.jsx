@@ -7,7 +7,7 @@ import useRequest from "../hooks/useRequest";
 import Card from "../components/Card";
 
 export default function NewsPage() {
-  const { news } = useRequest();
+  const { news, RequestUserNews } = useRequest();
   console.log(news);
   return (
     <div className="container">
@@ -19,6 +19,7 @@ export default function NewsPage() {
             likes={n.reactions.likes}
             tags={n.tags}
             views={n.views}
+            idUser={n.userId}
           />
         ))}
       </div>

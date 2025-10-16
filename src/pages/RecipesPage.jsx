@@ -13,7 +13,13 @@ export default function RecipesPage() {
     <div className="container">
       <div className="row">
         {recipes.map((r) => (
-          <CardRecipes key={r.id} title={r.name} image={r.image} />
+          <CardRecipes
+            key={r.id}
+            title={r.name}
+            image={r.image}
+            difficulty={r.difficulty}
+            rating={r.rating}
+          />
         ))}
       </div>
     </div>

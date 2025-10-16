@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 
 export default function useRequest() {
   const [news, setNews] = useState([]);
+
   const [recipes, setRecipes] = useState([]);
 
-  // FUNZIONE INDEX NEWS
+  // --- FUNZIONE INDEX NEWS
   async function getPosts() {
     try {
       const res = await axios.get("https://dummyjson.com/posts");
@@ -20,7 +21,7 @@ export default function useRequest() {
     getPosts();
   }, []);
 
-  // FUNZIONE INDEX RICETTE
+  // --- FUNZIONE INDEX RICETTE
   async function getRecipes() {
     try {
       const res = await axios.get("https://dummyjson.com/recipes");
