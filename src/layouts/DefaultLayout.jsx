@@ -1,13 +1,18 @@
-// # IMPORT DEPENDENCES
 import { Outlet, NavLink } from "react-router-dom";
 
 export default function DefaultLayout() {
+  // Altezza stimata di header e footer (Bootstrap navbar ≈ 56px)
+  const HEADER_H = 56; // se la tua navbar è più alta, aumenta questo valore
+  const FOOTER_H = 56; // se il footer è più alto, aumenta questo valore
+
   return (
-    <div className="min-vh-100 d-flex flex-column">
-      {/* Topbar */}
-      <header className="navbar navbar-expand-md navbar-light bg-white border-bottom sticky-top">
+    <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
+      {/* HEADER fisso */}
+      <header
+        className="navbar navbar-expand-md navbar-light bg-white border-bottom sticky-top"
+        style={{ height: HEADER_H }}
+      >
         <div className="container-fluid">
-          {/* Toggle sidebar (mobile) */}
           <button
             className="btn btn-outline-secondary d-md-none"
             type="button"
@@ -18,147 +23,165 @@ export default function DefaultLayout() {
           >
             ☰
           </button>
-
           <span className="navbar-brand ms-2 ms-md-0 fw-semibold">
             Widgets Dashboard
           </span>
-
-          <div className="ms-auto d-flex align-items-center gap-2">
-            <button className="btn btn-outline-secondary">
-              ⟳ <span className="d-none d-sm-inline">Aggiorna tutto</span>
-            </button>
-          </div>
         </div>
       </header>
 
-      {/* Corpo pagina: sidebar + contenuto */}
-      <div className="container-fluid flex-grow-1">
-        <div className="row">
-          {/* Sidebar desktop */}
-          <aside className="d-none d-md-block col-md-3 col-lg-2 border-end bg-light">
-            <div className="position-sticky top-0 min-vh-100">
-              <div className="d-flex align-items-center hstack gap-2 px-3 py-3 border-bottom">
-                <span className="fw-semibold">Menu</span>
-              </div>
-
-              {/* MENU */}
-              <nav className="nav flex-column py-3">
-                <NavLink
-                  to="/"
-                  end
-                  className={({ isActive }) =>
-                    `nav-link ${
-                      isActive ? "active fw-semibold text-primary" : ""
-                    }`
-                  }
-                >
-                  🏠 Dashboard
-                </NavLink>
-
-                <NavLink
-                  to="/recipes"
-                  className={({ isActive }) =>
-                    `nav-link ${
-                      isActive ? "active fw-semibold text-primary" : ""
-                    }`
-                  }
-                >
-                  🍝 Ricette
-                </NavLink>
-
-                <NavLink
-                  to="/news"
-                  className={({ isActive }) =>
-                    `nav-link ${
-                      isActive ? "active fw-semibold text-primary" : ""
-                    }`
-                  }
-                >
-                  📰 News
-                </NavLink>
-
-                <NavLink
-                  to="/todos"
-                  className={({ isActive }) =>
-                    `nav-link ${
-                      isActive ? "active fw-semibold text-primary" : ""
-                    }`
-                  }
-                >
-                  ✅ To-Do
-                </NavLink>
-
-                <NavLink
-                  to="/quotes"
-                  className={({ isActive }) =>
-                    `nav-link ${
-                      isActive ? "active fw-semibold text-primary" : ""
-                    }`
-                  }
-                >
-                  💡 Quotes
-                </NavLink>
-              </nav>
-
-              <div className="mt-auto px-3 py-3 small text-muted border-top">
-                v1.0 • Sidebar
-              </div>
-            </div>
-          </aside>
-
-          {/* Offcanvas sidebar (mobile) */}
-          <div
-            className="offcanvas offcanvas-start"
-            tabIndex="-1"
-            id="appSidebar"
-            aria-labelledby="appSidebarLabel"
-          >
-            <div className="offcanvas-header">
-              <h5 className="offcanvas-title" id="appSidebarLabel">
-                Menu
-              </h5>
-              <button
-                type="button"
-                className="btn-close text-reset"
-                data-bs-dismiss="offcanvas"
-                aria-label="Chiudi"
-              ></button>
-            </div>
-            <div className="offcanvas-body d-flex flex-column">
-              <nav className="nav flex-column">
-                <a className="nav-link" href="#" data-bs-dismiss="offcanvas">
-                  🏠 Dashboard
-                </a>
-                <a className="nav-link" href="#" data-bs-dismiss="offcanvas">
-                  🍝 Ricette
-                </a>
-                <a className="nav-link" href="#" data-bs-dismiss="offcanvas">
-                  📰 News
-                </a>
-                <a className="nav-link" href="#" data-bs-dismiss="offcanvas">
-                  ✅ To-Do
-                </a>
-                <a className="nav-link" href="#" data-bs-dismiss="offcanvas">
-                  💡 Quotes
-                </a>
-              </nav>
-
-              <div className="mt-auto small text-muted">v1.0 • Sidebar</div>
-            </div>
+      {/* AREA CENTRALE: altezza fissa, scroll interno su sidebar e main */}
+      <div
+        className="d-flex overflow-hidden"
+        style={{ height: `calc(100vh - ${HEADER_H}px - ${FOOTER_H}px)` }}
+      >
+        {/* SIDEBAR desktop (scroll interno) */}
+        <aside
+          className="d-none d-md-flex flex-column flex-shrink-0 border-end bg-light"
+          style={{ width: 240 }}
+        >
+          <div className="d-flex align-items-center hstack gap-2 px-3 py-3 border-bottom">
+            <span className="fw-semibold">Menu</span>
           </div>
 
-          {/* Content */}
-          <main className="col-md-9 col-lg-10 ms-sm-auto px-3 px-md-4 py-4">
-            {/* === Sostituisci con <Outlet /> o i tuoi componenti === */}
-            <Outlet />
-          </main>
+          <div className="flex-grow-1 overflow-auto">
+            <nav className="nav flex-column py-3">
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  `nav-link ${
+                    isActive ? "active fw-semibold text-primary" : ""
+                  }`
+                }
+              >
+                🏠 Dashboard
+              </NavLink>
+
+              <NavLink
+                to="/recipes"
+                className={({ isActive }) =>
+                  `nav-link ${
+                    isActive ? "active fw-semibold text-primary" : ""
+                  }`
+                }
+              >
+                🍝 Ricette
+              </NavLink>
+
+              <NavLink
+                to="/news"
+                className={({ isActive }) =>
+                  `nav-link ${
+                    isActive ? "active fw-semibold text-primary" : ""
+                  }`
+                }
+              >
+                📰 News
+              </NavLink>
+
+              <NavLink
+                to="/todos"
+                className={({ isActive }) =>
+                  `nav-link ${
+                    isActive ? "active fw-semibold text-primary" : ""
+                  }`
+                }
+              >
+                ✅ To-Do
+              </NavLink>
+
+              <NavLink
+                to="/quotes"
+                className={({ isActive }) =>
+                  `nav-link ${
+                    isActive ? "active fw-semibold text-primary" : ""
+                  }`
+                }
+              >
+                💡 Quotes
+              </NavLink>
+            </nav>
+          </div>
+
+          <div className="mt-auto px-3 py-3 small text-muted border-top">
+            v1.0 • Sidebar
+          </div>
+        </aside>
+
+        {/* OFFCANVAS mobile (opzionale) */}
+        <div
+          className="offcanvas offcanvas-start"
+          tabIndex="-1"
+          id="appSidebar"
+          aria-labelledby="appSidebarLabel"
+        >
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="appSidebarLabel">
+              Menu
+            </h5>
+            <button
+              type="button"
+              className="btn-close text-reset"
+              data-bs-dismiss="offcanvas"
+              aria-label="Chiudi"
+            ></button>
+          </div>
+          <div className="offcanvas-body d-flex flex-column">
+            <nav className="nav flex-column">
+              <NavLink
+                to="/"
+                end
+                className="nav-link"
+                data-bs-dismiss="offcanvas"
+              >
+                🏠 Dashboard
+              </NavLink>
+              <NavLink
+                to="/recipes"
+                className="nav-link"
+                data-bs-dismiss="offcanvas"
+              >
+                🍝 Ricette
+              </NavLink>
+              <NavLink
+                to="/news"
+                className="nav-link"
+                data-bs-dismiss="offcanvas"
+              >
+                📰 News
+              </NavLink>
+              <NavLink
+                to="/todos"
+                className="nav-link"
+                data-bs-dismiss="offcanvas"
+              >
+                ✅ To-Do
+              </NavLink>
+              <NavLink
+                to="/quotes"
+                className="nav-link"
+                data-bs-dismiss="offcanvas"
+              >
+                💡 Quotes
+              </NavLink>
+            </nav>
+            <div className="mt-auto small text-muted">v1.0 • Sidebar</div>
+          </div>
         </div>
+
+        {/* MAIN scrollabile */}
+        <main className="flex-grow-1 overflow-auto px-3 px-md-4 py-4">
+          <Outlet />
+        </main>
       </div>
 
-      {/* Footer */}
-      <footer className="border-top bg-white">
+      {/* FOOTER fisso */}
+      <footer
+        className="border-top bg-white d-flex align-items-center"
+        style={{ height: FOOTER_H }}
+      >
         <div className="container-fluid">
-          <div className="d-flex justify-content-between align-items-center py-3 px-3 px-md-4 small text-muted">
+          <div className="d-flex justify-content-between align-items-center py-2 px-3 px-md-4 small text-muted">
             <span>Powered by DummyJSON • widgets-dashboard</span>
             <a
               className="link-secondary"

@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 
 export default function useRequest() {
   const [news, setNews] = useState([]);
-
   const [recipes, setRecipes] = useState([]);
+  const [quotes, setQuotes] = useState([]);
 
   // --- FUNZIONE INDEX NEWS
   async function getPosts() {
@@ -35,5 +35,20 @@ export default function useRequest() {
     getRecipes();
   }, []);
 
-  return { news, recipes };
+  // --- FUNZIONE INDEX QUOTES
+
+  async function getQuotes() {
+    try {
+      const res = await axios.get("https://dummyjson.com/quotes");
+      // console.log("RICETTE: ", res.data);
+      setQuotes(res.data.quotes);
+    } catch (e) {
+      console.error("Errore", e);
+    }
+  }
+  useEffect(() => {
+    getQuotes();
+  }, []);
+
+  return { news, recipes, quotes };
 }
