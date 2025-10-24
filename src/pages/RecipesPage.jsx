@@ -9,6 +9,7 @@ import CardRecipes from "../components/CardRecipes";
 export default function RecipesPage() {
   const { recipes } = useRequest();
   console.log(recipes);
+
   return (
     <div className="container">
       <div className="row">
@@ -19,6 +20,7 @@ export default function RecipesPage() {
             image={r.image}
             difficulty={r.difficulty}
             rating={r.rating}
+            id={r.id}
           />
         ))}
       </div>

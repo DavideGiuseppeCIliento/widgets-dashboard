@@ -182,7 +182,7 @@ export default function DefaultLayout() {
       >
         <div className="container-fluid">
           <div className="d-flex justify-content-between align-items-center py-2 px-3 px-md-4 small text-muted">
-            <span>Powered by DummyJSON • widgets-dashboard</span>
+            <span>Powered by DummyJSON • Davide Giuseppe Ciliento</span>
             <a
               className="link-secondary"
               href="https://dummyjson.com/docs"

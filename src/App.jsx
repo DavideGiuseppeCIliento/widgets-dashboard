@@ -12,6 +12,7 @@ import NewsPage from "./pages/NewsPage";
 import QuotesPage from "./pages/QuotesPage";
 import RecipesPage from "./pages/RecipesPage";
 import TodosPage from "./pages/TodosPage";
+import RecipeDetailPage from "./pages/RecipeDetailPage";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/quotes" element={<QuotesPage />} />
           <Route path="/recipes" element={<RecipesPage />} />
+          <Route path="/recipes/:id" element={<RecipeDetailPage />}></Route>
           <Route path="/todos" element={<TodosPage />} />
         </Route>
       </Routes>
